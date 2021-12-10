@@ -1,0 +1,17 @@
+{"level":"info","message":"\n      ################################################\n      🛡️  Server listening on port: 8000 🛡️\n      ################################################\n      ","timestamp":"2021-11-25 22:57:54"}
+{"level":"info","message":"\n      ################################################\n      🛡️  Server listening on port: 8000 🛡️\n      ################################################\n      ","timestamp":"2021-11-25 22:58:54"}
+{"level":"info","message":"\n      ################################################\n      🛡️  Server listening on port: 8000 🛡️\n      ################################################\n      ","timestamp":"2021-11-25 23:01:25"}
+{"level":"info","message":"\n      ################################################\n      🛡️  Server listening on port: 8000 🛡️\n      ################################################\n      ","timestamp":"2021-11-25 23:02:15"}
+{"level":"info","message":"\n      ################################################\n      🛡️  Server listening on port: 8000 🛡️\n      ################################################\n      ","timestamp":"2021-11-25 23:03:26"}
+{"level":"info","message":"\n      ################################################\n      🛡️  Server listening on port: 8000 🛡️\n      ################################################\n      ","timestamp":"2021-11-25 23:05:18"}
+{"level":"info","message":"\n      ################################################\n      🛡️  Server listening on port: 8000 🛡️\n      ################################################\n      ","timestamp":"2021-11-25 23:08:08"}
+{"level":"info","message":"\n      ################################################\n      🛡️  Server listening on port: 8000 🛡️\n      ################################################\n      ","timestamp":"2021-11-25 23:09:44"}
+{"level":"info","message":"\n      ################################################\n      🛡️  Server listening on port: 8000 🛡️\n      ################################################\n      ","timestamp":"2021-11-25 23:11:23"}
+{"level":"info","message":"Express Loaded","timestamp":"2021-11-25 23:17:45"}
+{"level":"info","message":"\n      ################################################\n      🛡️  Server listening on port: 8000 🛡️\n      ################################################\n      ","timestamp":"2021-11-25 23:17:45"}
+{"level":"error","message":"{\"instance\":1,\"message\":\"Page you are looking /favicon.ico not found\",\"statusCode\":404}","timestamp":"2021-11-25 23:17:49"}
+{"level":"info","message":"Database Loaded","timestamp":"2021-11-27 16:05:40"}
+{"level":"info","message":"Repositories injected into container","timestamp":"2021-11-27 16:05:40"}
+{"level":"info","message":"Dependencies Injected","timestamp":"2021-11-27 16:05:40"}
+{"level":"info","message":"Express Loaded","timestamp":"2021-11-27 16:05:40"}
+{"level":"info","message":"\n      ################################################\n      🛡️  Server listening on port: 8000 🛡️\n      ################################################\n      ","timestamp":"2021-11-27 16:05:40"}

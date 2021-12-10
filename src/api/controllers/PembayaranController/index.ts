@@ -7,6 +7,7 @@ import autobind from '@utils/autobind';
 import PembayaranService from '@services/pembayaranServices';
 import SiswaServices from '@services/siswaServices';
 import { buildPdf } from '@utils/generatePDF';
+import { createExcel } from '@utils/createExcel';
 
 @Service()
 export default class PembayaranController extends Controller {
@@ -98,7 +99,6 @@ export default class PembayaranController extends Controller {
     next: NextFunction,
   ) {
     const { siswa_id, bulan, tahun } = req.body;
-    
 
     const data = await this.payServices.pembayaranSiswaPerBulan(
       siswa_id,
@@ -143,5 +143,51 @@ export default class PembayaranController extends Controller {
     }));
 
     this.response(res, 200, data);
+  }
+
+  @autobind
+  public async getDownloadExcel(
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ): Promise<void> {
+    const { startDate, endDate } = req.query;
+
+    const result = await this.payServices.findByRangeDate(
+      startDate as string,
+      endDate as string,
+    );
+
+    const data = result.map(item => ({
+      id: item.id,
+      nama: item.siswa.nama,
+      tanggal_bayar: moment(item.tanggal_bayar)
+        .utcOffset('+0700')
+        .format('YYYY-MM-DD'),
+      pembayaran: item.biaya_iuran,
+      bulan: this.month[item.bulan - 1],
+    }));
+
+    const header = [
+      { header: 'Nama', key: 'nama' },
+      { tanggal_bayar: 'Tanggal Bayar', key: 'tanggal_bayar' },
+      { pembayaran: 'Pembayaran', key: 'pembayaran' },
+      { bulan: 'Bulan', key: 'bulan' },
+    ];
+
+    const stream: Buffer = await createExcel(header, data);
+
+    res.setHeader(
+      'Content-Type',
+      'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+    );
+
+    res.setHeader(
+      'Content-Disposition',
+      `attachment; filename=InvitedRespondent_.xlsx`,
+    );
+
+    res.setHeader('Content-Length', stream.length);
+    res.send(stream);
   }
 }

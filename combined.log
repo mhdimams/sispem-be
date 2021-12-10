@@ -15,3 +15,18 @@
 {"level":"info","message":"Dependencies Injected","timestamp":"2021-11-27 16:05:40"}
 {"level":"info","message":"Express Loaded","timestamp":"2021-11-27 16:05:40"}
 {"level":"info","message":"\n      ################################################\n      🛡️  Server listening on port: 8000 🛡️\n      ################################################\n      ","timestamp":"2021-11-27 16:05:40"}
+{"level":"info","message":"Begin Databse Connection","timestamp":"2021-12-11 01:27:01"}
+{"level":"info","message":"Connect To Database Sucessfully","timestamp":"2021-12-11 01:27:02"}
+{"level":"info","message":"Begin Databse Connection","timestamp":"2021-12-11 01:27:49"}
+{"level":"info","message":"Connect To Database Sucessfully","timestamp":"2021-12-11 01:27:49"}
+{"level":"info","message":"Begin Databse Connection","timestamp":"2021-12-11 01:28:47"}
+{"level":"info","message":"Connect To Database Sucessfully","timestamp":"2021-12-11 01:28:48"}
+{"level":"info","message":"Begin Databse Connection","timestamp":"2021-12-11 01:29:40"}
+{"level":"info","message":"Connect To Database Sucessfully","timestamp":"2021-12-11 01:29:41"}
+{"level":"info","message":"Begin Databse Connection","timestamp":"2021-12-11 01:30:35"}
+{"level":"info","message":"Connect To Database Sucessfully","timestamp":"2021-12-11 01:30:35"}
+{"level":"info","message":"Database Loaded","timestamp":"2021-12-11 01:30:35"}
+{"level":"info","message":"Repositories injected into container","timestamp":"2021-12-11 01:30:35"}
+{"level":"info","message":"Dependencies Injected","timestamp":"2021-12-11 01:30:35"}
+{"level":"info","message":"Express Loaded","timestamp":"2021-12-11 01:30:35"}
+{"level":"info","message":"\n      ################################################\n      🛡️  Server listening on port: 8000 🛡️\n      ################################################\n      ","timestamp":"2021-12-11 01:30:35"}

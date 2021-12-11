@@ -10,6 +10,7 @@ import {
 
 import { Siswa } from './Siswa';
 import { User } from './User';
+
 @Entity('tbl_pembayaran', { schema: 'sispem' })
 export class Pembayaran {
   @PrimaryGeneratedColumn({ type: 'int', name: 'id' })

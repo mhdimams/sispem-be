@@ -8,6 +8,11 @@ import {
 } from 'typeorm';
 import { Pembayaran } from './Pembayaran';
 
+export enum Status {
+  Active = 'active',
+  Inactive = 'inactive',
+}
+
 @Entity('tbl_siswa', { schema: 'sispem' })
 export class Siswa {
   @PrimaryGeneratedColumn({ type: 'int', name: 'id' })
@@ -30,6 +35,15 @@ export class Siswa {
 
   @OneToMany(() => Pembayaran, pembayaran => pembayaran.siswa)
   dataPembayaran: Pembayaran[];
+
+  @Column({
+    name: 'status',
+    type: 'enum',
+    enum: Status,
+    default: Status.Active,
+    nullable: true,
+  })
+  status: Status;
 
   @Column()
   @CreateDateColumn()

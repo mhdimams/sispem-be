@@ -151,7 +151,7 @@ export default class PembayaranController extends Controller {
     res: Response,
     next: NextFunction,
   ): Promise<void> {
-    const { startDate, endDate } = req.query;
+    const { startDate, endDate } = req.body;
 
     const result = await this.payServices.findByRangeDate(
       startDate as string,
@@ -169,10 +169,10 @@ export default class PembayaranController extends Controller {
     }));
 
     const header = [
-      { header: 'Nama', key: 'nama' },
-      { tanggal_bayar: 'Tanggal Bayar', key: 'tanggal_bayar' },
-      { pembayaran: 'Pembayaran', key: 'pembayaran' },
-      { bulan: 'Bulan', key: 'bulan' },
+      { header: 'Nama', key: 'nama', width: 25 },
+      { header: 'Tanggal Bayar', key: 'tanggal_bayar', width: 15 },
+      { header: 'Pembayaran', key: 'pembayaran', width: 15 },
+      { header: 'Bulan', key: 'bulan', width: 15 },
     ];
 
     const stream: Buffer = await createExcel(header, data);

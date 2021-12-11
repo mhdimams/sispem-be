@@ -12,7 +12,9 @@ export default class SiswaServices {
 
   public async findAll(): Promise<SiswaModel.Siswa[]> {
     try {
-      const result = await this.siswaRepo.find({});
+      const result = await this.siswaRepo.find({
+        where: { status: SiswaModel.Status.Active },
+      });
       return result;
     } catch (error) {
       throw error;
@@ -58,7 +60,9 @@ export default class SiswaServices {
 
   public async deleteOne(id: number): Promise<DeleteResult> {
     try {
-      return await this.siswaRepo.delete(id);
+      return await this.siswaRepo.update(id, {
+        status: SiswaModel.Status.Inactive,
+      });
     } catch (error) {
       throw error;
     }

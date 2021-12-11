@@ -13,14 +13,11 @@ export default (app: Router) => {
   const siswa = Container.get(SiswaController);
 
   router.get('/findbynameorid', catchAsync(siswa.getByNameOrId));
-
+  router.patch('/delete/:id', catchAsync(isAuth), catchAsync(siswa.delete));
   router
     .route('/')
     .get(catchAsync(siswa.getAll))
     .post(catchAsync(isAuth), catchAsync(siswa.create));
 
-  router
-    .route('/:id')
-    .patch(catchAsync(isAuth), catchAsync(siswa.update))
-    .delete(catchAsync(isAuth), catchAsync(siswa.delete));
+  router.route('/:id').patch(catchAsync(isAuth), catchAsync(siswa.update));
 };

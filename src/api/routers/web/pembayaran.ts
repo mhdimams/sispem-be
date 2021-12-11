@@ -29,5 +29,11 @@ export default (app: Router) => {
     catchAsync(pembayaran.getRangePembayaran),
   );
 
+  router.post(
+    '/download-laporan',
+    catchAsync(isAuth),
+    catchAsync(pembayaran.getDownloadExcel),
+  );
+
   router.route('/:id').get(catchAsync(pembayaran.getPembayaranById));
 };

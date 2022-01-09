@@ -1,20 +1,26 @@
 import PDFDocument from 'pdfkit';
 import moment from 'moment';
+
 export const buildPdf = (data: any, dataCallback: any, endCallback: any) => {
   const doc = new PDFDocument();
   doc.on('data', dataCallback);
   doc.on('end', endCallback);
-  doc.fontSize(12).text(`Nama : ${data.nama}`);
-  doc.fontSize(12).text(`Pembayaran Bulan: ${data.bulan}`);
-  doc.fontSize(12).text(`Pembayaran Tahun: ${data.tahun}`);
+  doc.image('images/Header.jpg', 0, 10, {
+    width: 610,
+    height: 150,
+  });
+
+  doc.fontSize(24).text('INVOICE', 250, 170);
+  doc.fontSize(16).text(`Nama                     : ${data.nama}`, 80, 220);
+  doc.fontSize(16).text(`Pembayaran Bulan : ${data.bulan}`);
+  doc.fontSize(16).text(`Pembayaran Tahun : ${data.tahun}`);
   doc
-    .fontSize(12)
-    .text(`Tanggal Bayar: ${moment(data.tanggal).format('DD MMMM YYYY')}`)
+    .fontSize(16)
+    .text(
+      `Tanggal Bayar         : ${moment(data.tanggal).format('DD MMMM YYYY')}`,
+    )
     .moveDown();
-  doc
-    .fontSize(25)
-    .text(`====================================`, { align: 'center' })
-    .moveDown();
-  doc.fontSize(25).text(`Lunas`, { align: 'center' });
+  doc.moveDown();
+  doc.fontSize(25).text(`Lunas`, { align: 'right' });
   doc.end();
 };

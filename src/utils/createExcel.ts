@@ -3,6 +3,7 @@ import * as excel from 'exceljs';
 export const createExcel = async (
   headers: Partial<excel.Column>[],
   rows: any[],
+  total: number,
   sheetName: string = 'My Worksheet',
 ): Promise<Buffer> => {
   const workbook: excel.stream.xlsx.WorkbookWriter =
@@ -13,6 +14,17 @@ export const createExcel = async (
     sheet.addRow(rows[i]);
   }
 
+  const g2 = sheet.getCell('G2');
+  g2.value = 'Total Pembayaran';
+  g2.font = {
+    bold: true,
+  };
+
+  const h2 = sheet.getCell('H2');
+  h2.value = total;
+  h2.font = {
+    bold: true,
+  };
   sheet.commit();
   return new Promise((resolve, reject): void => {
     workbook

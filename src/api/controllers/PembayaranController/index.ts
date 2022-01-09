@@ -168,6 +168,8 @@ export default class PembayaranController extends Controller {
       bulan: this.month[item.bulan - 1],
     }));
 
+    const total = data.reduce((acc, item) => acc + item.pembayaran, 0);
+
     const header = [
       { header: 'Nama', key: 'nama', width: 25 },
       { header: 'Tanggal Bayar', key: 'tanggal_bayar', width: 15 },
@@ -175,7 +177,7 @@ export default class PembayaranController extends Controller {
       { header: 'Bulan', key: 'bulan', width: 15 },
     ];
 
-    const stream: Buffer = await createExcel(header, data);
+    const stream: Buffer = await createExcel(header, data, total);
 
     res.setHeader(
       'Content-Type',

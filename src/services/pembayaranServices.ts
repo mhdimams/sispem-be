@@ -17,6 +17,7 @@ export default class PembayaranServices {
     try {
       const result = await this.pembayaranRepo.find({
         where: { siswa_id: siswa_id, tahun: tahun },
+        relations: ['siswa'],
       });
 
       return result;

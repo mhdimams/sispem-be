@@ -35,5 +35,11 @@ export default (app: Router) => {
     catchAsync(pembayaran.getDownloadExcel),
   );
 
+  router.post(
+    '/siswa-tahun',
+    catchAsync(isAuth),
+    catchAsync(pembayaran.getDownloadExcelPerYear),
+  );
+
   router.route('/:id').get(catchAsync(pembayaran.getPembayaranById));
 };

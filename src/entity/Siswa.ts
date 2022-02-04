@@ -18,6 +18,9 @@ export class Siswa {
   @PrimaryGeneratedColumn({ type: 'int', name: 'id' })
   id: number;
 
+  @Column({ name: 'nis', type: 'int', nullable: true })
+  nis: string;
+
   @Column({ name: 'nama', type: 'varchar', nullable: true })
   nama: string;
 

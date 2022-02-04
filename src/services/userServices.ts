@@ -67,6 +67,31 @@ export default class PembayaranServices {
     });
   }
 
+  public async changePassword(
+    id: number,
+    oldPassword: string,
+    newPassword: string,
+  ): Promise<boolean> {
+    try {
+      const user = await this.findUserById(id);
+
+      if (!user) return false;
+
+      const checkPassword = await this.comparePassword(
+        oldPassword,
+        user.password,
+      );
+      if (!checkPassword) return false;
+
+      const hashedPassword = await this.generateHash(newPassword);
+
+      await this.userRepo.update(id, { password: hashedPassword });
+      return true;
+    } catch (error) {
+      throw error;
+    }
+  }
+
   private async comparePassword(
     passwordString: string,
     passwordHash: string,

@@ -5,7 +5,7 @@ import moment from 'moment';
 import Controller from '@controllers/Controller';
 import autobind from '@utils/autobind';
 import UserServices from '@services/userServices';
-import { BadRequest } from '@utils/AppError';
+import { BadRequest, ServerError } from '@utils/AppError';
 import config from '@app/config';
 
 @Service()
@@ -55,5 +55,34 @@ export default class AuthController extends Controller {
     });
 
     this.response(res, 200, token);
+  }
+
+  @autobind
+  public async changePassword(
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ): Promise<void> {
+    const { oldPassword, newPassword, newPasswordConfirmation } = req.body;
+
+    if (!newPassword || !newPasswordConfirmation || !oldPassword) {
+      throw new BadRequest(`New & Old password is required!`);
+    }
+
+    if (newPassword !== newPasswordConfirmation) {
+      throw new BadRequest(`New Password missmatch`);
+    }
+
+    const result = await this.userServices.changePassword(
+      req.currentUser.id,
+      oldPassword,
+      newPassword,
+    );
+
+    if (!result) {
+      throw new ServerError(`Failed update password`);
+    }
+
+    this.response(res, 200, result);
   }
 }

@@ -116,6 +116,7 @@ export default class PembayaranController extends Controller {
         bulan: data.bulan,
         tahun: data.tahun,
         tanggal: data.tanggal_bayar,
+        totalBayar: data.biaya_iuran,
       },
       chunk => stream.write(chunk),
       () => stream.end(),
@@ -157,6 +158,51 @@ export default class PembayaranController extends Controller {
       startDate as string,
       endDate as string,
     );
+
+    const data = result.map(item => ({
+      id: item.id,
+      nama: item.siswa.nama,
+      tanggal_bayar: moment(item.tanggal_bayar)
+        .utcOffset('+0700')
+        .format('YYYY-MM-DD'),
+      pembayaran: item.biaya_iuran,
+      bulan: this.month[item.bulan - 1],
+    }));
+
+    const total = data.reduce((acc, item) => acc + item.pembayaran, 0);
+
+    const header = [
+      { header: 'Nama', key: 'nama', width: 25 },
+      { header: 'Tanggal Bayar', key: 'tanggal_bayar', width: 15 },
+      { header: 'Pembayaran', key: 'pembayaran', width: 15 },
+      { header: 'Bulan', key: 'bulan', width: 15 },
+    ];
+
+    const stream: Buffer = await createExcel(header, data, total);
+
+    res.setHeader(
+      'Content-Type',
+      'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+    );
+
+    res.setHeader(
+      'Content-Disposition',
+      `attachment; filename=InvitedRespondent_.xlsx`,
+    );
+
+    res.setHeader('Content-Length', stream.length);
+    res.send(stream);
+  }
+
+  @autobind
+  public async getDownloadExcelPerYear(
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ): Promise<void> {
+    const { siswa_id, tahun } = req.body;
+
+    const result = await this.payServices.pembayaranPerSiswa(siswa_id, tahun);
 
     const data = result.map(item => ({
       id: item.id,

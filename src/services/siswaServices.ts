@@ -3,7 +3,7 @@ import { DeleteResult, InsertResult, Like, UpdateResult } from 'typeorm';
 
 import { SiswaModel } from '@entity';
 import { ISiswaBody } from '@interfaces';
-import autobind from '@utils/autobind';
+import padLeadingZeros from '@utils/zeroPrefix';
 
 @Service()
 export default class SiswaServices {
@@ -42,6 +42,13 @@ export default class SiswaServices {
   public async insertOne(body: ISiswaBody): Promise<InsertResult> {
     try {
       const result: InsertResult = await this.siswaRepo.insert({ ...body });
+
+      const id = result.generatedMaps[0].id;
+
+      const yearLast = body.tanggal_masuk.split('-')[0].slice(2);
+      const endNumber = padLeadingZeros(id, 4);
+
+      await this.siswaRepo.update(id, { nis: `${yearLast}${endNumber}` });
 
       return result;
     } catch (error) {
